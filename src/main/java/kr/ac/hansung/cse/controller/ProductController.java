@@ -21,13 +21,14 @@ import kr.ac.hansung.cse.repo.ProductRepository;
 
 //@CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@RequestMapping("/api/v1")
 public class ProductController {
 	
 	@Autowired
 	ProductRepository repository;
 	
 	// Create new product
-	@PostMapping(value = "/products") 
+	@PostMapping("/products") 
 	public ResponseEntity<Product> postProduct(@RequestBody Product product) {
 		try {
 			Product _product = new Product();
@@ -72,7 +73,7 @@ public class ProductController {
 	}
 	
 	// Fetch all products of a category
-	@GetMapping(value = "/products/category/{category}")
+	@GetMapping("/products/category/{category}")
 	public ResponseEntity<List<Product>> findByCategory(@PathVariable String category) {
 		try {
 			List<Product> products = repository.findByCategory(category);
@@ -87,7 +88,7 @@ public class ProductController {
 	}
 
 	// Modify values of product with id
-	@PutMapping(value = "/products/{id}")
+	@PutMapping("/products/{id}")
 	public ResponseEntity<Product> updateProduct(@PathVariable("id") int id, @RequestBody Product product) {
 		Optional<Product> productData = repository.findById(id);
 
